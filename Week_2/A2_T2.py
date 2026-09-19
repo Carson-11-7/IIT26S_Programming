@@ -1,0 +1,8 @@
+print('Program starting.')
+car_brand=input('Insert car brand: ')
+car_model=input('Insert car model: ')
+print("Car brand", end='')
+print(" is ", car_brand, " and", sep='"', end="")
+print(" the model", end='')
+print(f" is ", car_model, ".", sep="'")
+print('Program ending.')
