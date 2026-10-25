@@ -1,0 +1,7 @@
+print("Program starting.")
+print()
+x=int(input("Insert starting value: "))
+y=int(input("Insert stoping value: "))
+print(", ".join(map(str, range(x, y + 1))))
+print()
+print("Program ending.")
