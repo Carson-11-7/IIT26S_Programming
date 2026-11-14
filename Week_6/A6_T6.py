@@ -1,40 +1,59 @@
 LOWER_ALPHABETS = "abcdefghijklmnopqrstuvwxyz"
 UPPER_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-print("Program starting.")
-print()
-print("Collecting plain text rows for ciphering.")
 
-rows = []
-while True:
-    row = input("Insert row(empty stops): ")
-    if len(row) == 0:
-        break
-    rows.append(row)
-    
-ciphered_rows = []
-for row in rows:
-    ciphered = ""
-    for char in row:
+def writeFile(Filename: str, Content: str):
+    file = open(Filename, "w", encoding = "UTF-8")
+    file.write(Content)
+    file.close()
+
+
+def askRows() -> str:
+    rows = []
+    while True:
+        row = input("Insert row(empty stops): ")
+        if len(row) == 0:
+            break
+        rows.append(row)
+    return "\n".join(rows)
+
+
+def shiftCharacter(Character: str, Alphabets: str, Shift: int = 13) -> str:
+    position = Alphabets.find(Character)
+    return Alphabets[(position + Shift) % len(Alphabets)]
+
+
+def rot13(Content: str) -> str:
+    result = ""
+    for char in Content:
         if char in LOWER_ALPHABETS:
-            ciphered += LOWER_ALPHABETS[(LOWER_ALPHABETS.find(char) + 13) % 26]
+            result += shiftCharacter(char, LOWER_ALPHABETS)
         elif char in UPPER_ALPHABETS:
-            ciphered += UPPER_ALPHABETS[(UPPER_ALPHABETS.find(char) + 13) % 26]
+            result += shiftCharacter(char, UPPER_ALPHABETS)
         else:
-            ciphered += char
-    ciphered_rows.append(ciphered)
+            result += char
+    return result
 
-print()
-print("#### Ciphered text ####")
-for row in ciphered_rows:
-    print(row)
-print()
-print("#### Ciphered text ####")
 
-filename = input("Insert filename to save: ")
-file = open(filename, "w")
-for row in ciphered_rows:
-    file.write(row + "\n")
-file.close()
-print("Ciphered text saved!")
-print("Program ending.")
+def main() -> None:
+    print("Program starting.")
+    print()
+    print("Collecting plain text rows for ciphering.")
+
+    message = askRows()
+    ciphered = rot13(message)
+
+    print()
+    print("#### Ciphered text ####")
+    print(ciphered)
+    print()
+    print("#### Ciphered text ####")
+
+    filename = input("Insert filename to save: ")
+    writeFile(filename, ciphered + "\n")
+
+    print("Ciphered text saved!")
+    print("Program ending.")
+
+
+main()

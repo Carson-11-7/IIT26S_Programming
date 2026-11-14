@@ -1,31 +1,57 @@
-numbers = []
-count = int(input("Insert count: "))
+LOWER_ALPHABETS = "abcdefghijklmnopqrstuvwxyz"
+UPPER_ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-text = input("Enter whole numbers separated by spaces: ")
-for item in text.split():
-    numbers.append(int(item))
 
-def average(values):
-    total = 0
-    for n in values:
-        total += n
-    return total / len(values)
+def input_row() -> list:
+    rows = []
+    while True:
+        row = input("Insert row(empty stops): ")
+        if len(row) == 0:
+            break
+        rows.append(row)
+    return rows
 
-def describe(n):
-    if n % 2 == 0:
-        return "even"
-    elif n > 10:
-        return "odd and big"
-    else:
-        return "odd"
 
-print("Average:", average(numbers))
-print("Square of 4:", 4 ** 2, "| 17 // 5 =", 17 // 5, "| 6 * 7 =", 6 * 7)
+def cipher(rows) -> list:
+    ciphered_rows = []
+    for row in rows:
+        ciphered = ""
+        for char in row:
+            if char in LOWER_ALPHABETS:
+                ciphered += LOWER_ALPHABETS[(LOWER_ALPHABETS.find(char) + 13) % 26]
+            elif char in UPPER_ALPHABETS:
+                ciphered += UPPER_ALPHABETS[(UPPER_ALPHABETS.find(char) + 13) % 26]
+            else:
+                ciphered += char
+        ciphered_rows.append(ciphered)
+    return ciphered_rows
 
-for n in numbers:
-    print(n, "is", describe(n))
 
-while count > 0:
-    print("Countdown:", count)
-    count -= 1
-print("Done!")
+def save(ciphered_mesasage):
+    filename = input("Insert filename to save: ")
+    file = open(filename, "w")
+    for row in ciphered_message:
+        file.write(row + "\n")
+    file.close()
+
+
+def main() -> None:
+    print("Program starting.")
+    print()
+    #----------------------------------------------#
+    print("Collecting plain text rows for ciphering.")
+    input_row()
+    save() 
+    print()
+    #----------------------------------------------#
+    print("#### Ciphered text ####")
+    lol = 
+    print(lol)
+    print()
+    print("#### Ciphered text ####")
+    #----------------------------------------------#
+    save()
+    print("Ciphered text saved!")
+    print("Program ending.")
+
+main()

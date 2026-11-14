@@ -15,7 +15,7 @@ def readValues(filename):
     return values
 
 
-def analyseNumbers(values):
+def analyseValues(values):
     total = 0
     count = 0
     greatest = 0
@@ -32,8 +32,10 @@ def analyseNumbers(values):
     if count > 0:
         average = total / count
 
-    return (str(count) + SEPARATOR + str(total) + SEPARATOR
-            + str(greatest) + SEPARATOR + "{:.2f}".format(average))
+    return ("Count;Sum;Greatest;Average\n"
+        + str(count) + SEPARATOR + str(total) + SEPARATOR
+        + str(greatest) + SEPARATOR + "{:.2f}".format(average)
+        + "\n")
 
 
 def displayResults(filename: str, results: str):
@@ -45,9 +47,14 @@ def displayResults(filename: str, results: str):
     print("#### Number analysis - END ####")
 
 
-print("Program starting.")
-filename = input("Insert filename: ")
-values = readValues(filename)
-results = analyseNumbers(values)
-displayResults(filename, results)
-print("Program ending.")
+def main():
+    print("Program starting.")
+    filename = input("Insert filename: ")
+    values = readValues(filename)
+    results = analyseValues(values)
+    displayResults(filename, results)
+    print("Program ending.")
+
+
+if __name__ == "__main__":
+    main()

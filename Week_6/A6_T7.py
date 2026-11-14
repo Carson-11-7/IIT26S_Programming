@@ -33,11 +33,11 @@ while True:
         row = line.strip()
 file.close()
 
-if row == "":
-    file = open("player_progress.txt", "w")
-    file.write("current_location;next_location;passphrase\n0;1;qvfpvcyvar\n")
-    file.close()
-    row = "0;1;qvfpvcyvar"
+file = open("player_progress.txt", "w")
+file.write("current_location;next_location;passphrase\n
+file.write("0;1;qvfpvcyvar")  
+file.close()
+row = "0;1;qvfpvcyvar"
 
 current, nxt, cipher_pass = row.split(";")
 plain_pass = rot13(cipher_pass)
